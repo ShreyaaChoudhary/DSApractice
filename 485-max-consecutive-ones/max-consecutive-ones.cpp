@@ -6,18 +6,16 @@ public:
         
         for (int i = 0; i < nums.size(); i++) {
             if (nums[i] == 1) {
-                c++;  // Increment count when 1 is encountered
+                c++;  
             } else {
-                max.push_back(c);  // Push count of consecutive ones
-                c = 0;  // Reset count when 0 is encountered
+                max.push_back(c);  
+                c = 0;  
             }
         }
         
-        // Push the last count if it ends with consecutive 1's
         max.push_back(c);
 
-        // Find the maximum count of consecutive ones
         auto max_elem = max_element(max.begin(), max.end());
-        return *max_elem;  // Return the maximum value
+        return *max_elem;  
     }
 };
