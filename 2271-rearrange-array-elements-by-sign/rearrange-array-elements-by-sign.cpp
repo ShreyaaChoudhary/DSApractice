@@ -1,10 +1,8 @@
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
-        int n = nums.size();
+        int n = nums.size(),pos = 0,neg = 1;
         vector<int> ans(n,0);
-        int pos = 0 ; 
-        int neg = 1;
         for(int i = 0 ; i < n ; i++){
             if(nums[i]<0){
                 //neg
