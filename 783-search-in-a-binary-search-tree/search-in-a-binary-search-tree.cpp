@@ -12,29 +12,40 @@
 class Solution {
 public:
     TreeNode* searchBST(TreeNode* root, int val) {
-        queue<TreeNode*> q;
-        TreeNode* empty =0;
-        q.push(root);
-        q.push(NULL);
-        while(!q.empty()){
-            TreeNode* curr = q.front();
-            q.pop();
-            if(curr==NULL){
-                if(!q.empty()){
-                    q.push(NULL);
-                }
-            }else{
-                if(curr->val==val){
-                    return curr;
-                }
-                if(curr->left){
-                    q.push(curr->left);
-                }
-                if(curr->right){
-                    q.push(curr->right);
-                }
-            }
+    //     queue<TreeNode*> q;
+    //     TreeNode* empty =0;
+    //     q.push(root);
+    //     q.push(NULL);
+    //     while(!q.empty()){
+    //         TreeNode* curr = q.front();
+    //         q.pop();
+    //         if(curr==NULL){
+    //             if(!q.empty()){
+    //                 q.push(NULL);
+    //             }
+    //         }else{
+    //             if(curr->val==val){
+    //                 return curr;
+    //             }
+    //             if(curr->left){
+    //                 q.push(curr->left);
+    //             }
+    //             if(curr->right){
+    //                 q.push(curr->right);
+    //             }
+    //         }
+    //     }
+    //     return empty;
+    // }
+    if (!root) {
+            return nullptr;
         }
-        return empty;
+        if (root->val == val) {
+            return root;
+        } else if (root->val > val) {
+            return searchBST(root->left, val);
+        } else {
+            return searchBST(root->right, val);
+        }        
     }
 };
