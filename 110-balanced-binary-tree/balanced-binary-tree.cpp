@@ -11,13 +11,18 @@
  */
 class Solution {
 public:
-    int finddepth(TreeNode* root){
-        if(root==NULL)return 0;
-        return max(finddepth(root->left),finddepth(root->right))+1;
+    int findheight(TreeNode* root){
+        if(root==NULL)
+        return 0;
+        return 1+ max(findheight(root->left), findheight(root->right));
     }
     bool isBalanced(TreeNode* root) {
-        if(root==NULL)return true;
-        bool flag = abs(finddepth(root->left)-finddepth(root->right))>1?false:true;
-        return flag && isBalanced(root->left) && isBalanced(root->right);
+        if(root==NULL)
+        return true;
+        if(abs(findheight(root->left)-findheight(root->right))>1){
+            return false;
+        }
+        return isBalanced(root->left) && isBalanced(root->right);
+
     }
 };
