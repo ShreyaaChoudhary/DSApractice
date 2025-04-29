@@ -11,9 +11,6 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        //slow, fast 
-        //when slow moves one fast moves 2
-        //jb fast reaches end slow reached the middle
         ListNode* slow = head;
         ListNode* fast = head;
         while(fast && fast->next){
