@@ -1,35 +1,13 @@
 class Solution {
 public:
     string removeOuterParentheses(string s) {
-        //depth counter method
-        // int count = 0;
-        // string res = "";
-        // int i = 0;
-        // while(i<s.size()){
-        //     if(s[i]=='('){
-        //         if(count>0){
-        //             res+=s[i];
-        //         }
-        //         count++;
-        //     }
-        //     else{
-        //         count--;
-        //         if(count>0){
-        //             res+=s[i];
-        //         }
-        //     }
-        //     i++;
-        // }
-        // return res;
-
-        //using stack
         stack<char> st;
+        string res="";
         if(s.empty()) return "";
-        string res = "";
-        for(int i = 0; i< s.length(); i++){
+        for(int i=0 ; i<s.size(); i++){
             if(st.empty()){
                 st.push(s[i]);
-                continue; //skips all other iterations
+                continue; //skips all iterations
             }
             if(s[i]=='('){
                 st.push('(');
@@ -41,6 +19,6 @@ public:
                 res+=s[i];
             }
         }
-        return res;
+    return res;
     }
 };
