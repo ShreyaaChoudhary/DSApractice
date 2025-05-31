@@ -9,12 +9,12 @@ public:
         }
         string res = "";
         reverse(words.begin(), words.end());
-        for(int i= 0 ; i<words.size(); i++){
+        for(int i = 0; i<words.size(); i++){
             res+=words[i];
             if(i<words.size()-1){
                 res+=" ";
             }
         }
-        return res;
+return res;
     }
 };
