@@ -16,6 +16,9 @@ private:
                 return true;
         }
         vis[i][j] = false;
+        //test case for backtracking
+        //[["C","A","A"],["A","A","A"],["B","C","D"]]
+        //"AAB"
         return false;
     }
 
