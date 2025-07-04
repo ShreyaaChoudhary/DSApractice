@@ -4,7 +4,7 @@ using namespace std;
 
 class Solution {
 public:
-    int dp[100]; // class-level dp array
+    int dp[100]; 
 
     int f(int i , vector<int>& nums) {
         if (i < 0) return 0;
