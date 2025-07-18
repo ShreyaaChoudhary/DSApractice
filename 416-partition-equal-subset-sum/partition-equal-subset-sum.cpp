@@ -7,11 +7,12 @@ public:
         vector<bool> dp(target+1,false);
         dp[0] = true;
         for(auto n:nums){
-        for(int i = target ; i>=n; i--){
-            if(dp[i]==true) continue;
-            if(dp[i-n]) dp[i] = true;
-            if(dp[target]) return true;
-        }}
+            for(int i = target; i>=n; i--){
+                if(dp[i]) continue;
+                if(dp[i-n]) dp[i] = true;
+                if(dp[target]) return true;
+            }
+        }
         return false;
     }
 };
