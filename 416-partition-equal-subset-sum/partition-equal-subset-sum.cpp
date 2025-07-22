@@ -1,33 +1,50 @@
 class Solution {
 public:
-    // bool findsub(int i, int target , vector<vector<int>> &dp, vector<int> &nums){
-    //     if(target==0) return true;
-    //     if(i==0) return target==nums[i];
-    //     int notpick = findsub(i-1, target, dp, nums); 
-    //     int pick = false;
-    //     if(nums[i]<=target){
-    //         pick = findsub(i-1,target-nums[i], dp, nums);
-    //     }
-    //     return dp[i][target] = notpick||pick;
-    // }
-    bool canPartition(vector<int>& nums) {
-        int total = accumulate(nums.begin(),nums.end(),0);
-        if(total%2!=0) return false;
-        int target = total/2;
-        vector<bool> dp(target+1,false);
-        dp[0] = true;
-        for(auto n:nums){
-            for(int i = target; i>=n; i--){
-                if(dp[i]) continue;
-                if(dp[i-n]) dp[i] = true;
-                if(dp[target]) return true;
-            }
-        }
-        return false;
-        // int total = accumulate(nums.begin(), nums.end(), 0);
-        // if(total%2!=0) return false;
-        // int target = total/2;
-        // vector<vector<int>> dp(nums.size(),vector<int>(target+1,-1));
-        // return findsub(nums.size()-1,target,dp,nums);
+bool subsetSumUtil(int ind, int target, vector<int>& arr, vector<vector<int>>& dp) {
+    // Base case: If the target sum is 0, we found a valid partition
+    if (target == 0)
+        return true;
+
+    // Base case: If we have considered all elements and the target is still not 0, return false
+    if (ind == 0)
+        return arr[0] == target;
+
+    // If the result for this state is already calculated, return it
+    if (dp[ind][target] != -1)
+        return dp[ind][target];
+
+    // Recursive cases
+    // 1. Exclude the current element
+    bool notTaken = subsetSumUtil(ind - 1, target, arr, dp);
+
+    // 2. Include the current element if it doesn't exceed the target
+    bool taken = false;
+    if (arr[ind] <= target)
+        taken = subsetSumUtil(ind - 1, target - arr[ind], arr, dp);
+
+    // Store the result in the DP table and return
+    return dp[ind][target] = notTaken || taken;
+}
+
+    bool canPartition(vector<int>& arr) {
+         int totSum = 0;
+         int n = arr.size();
+
+    // Calculate the total sum of the array
+    for (int i = 0; i < n; i++) {
+        totSum += arr[i];
     }
-};
+
+    // If the total sum is odd, it cannot be partitioned into two equal subsets
+    if (totSum % 2 == 1)
+        return false;
+    else {
+        int k = totSum / 2;
+
+        // Create a DP table with dimensions n x k+1 and initialize with -1
+        vector<vector<int>> dp(n, vector<int>(k + 1, -1));
+
+        // Call the subsetSumUtil function to check if it's possible to partition
+        return subsetSumUtil(n - 1, k, arr, dp);
+    }
+}};
