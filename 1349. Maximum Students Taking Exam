@@ -1,0 +1,42 @@
+class Solution {
+public:
+ 
+    map<pair<int, string>, int> dp;
+ 
+    int arrrrr(vector<vector<char>>& arr, int row, string prev) {
+ 
+        if (row == arr.size()) return 0;
+        if (dp.count({row, prev}))
+            return dp[{row, prev}];
+ 
+        int n = arr[0].size();
+        int ans = 0;
+        string cur(n, '.');
+        dega(arr, row, 0, prev, cur, 0, ans);
+        return dp[{row, prev}] = ans;
+    }
+ 
+    void dega(vector<vector<char>>& arr, int row, int col, string prev, string& cur, int count, int& ans) {
+ 
+        int n = arr[0].size();
+        if (col == n) {
+            ans = max(ans,count + arrrrr(arr, row + 1, cur)); return;
+        }
+ 
+        dega(arr, row, col + 1, prev, cur, count, ans);
+ 
+        if (arr[row][col] == '.' && (col == 0 || cur[col - 1] != 'S') &&(col == 0 || prev[col - 1] != 'S') && (col == n - 1 || prev[col + 1] != 'S')) {
+    cur[col] = 'S';
+ 
+            dega(arr, row, col + 1,prev, cur, count + 1, ans);
+            cur[col] = '.';
+        }
+    }
+ 
+    int maxStudents(vector<vector<char>>& seats) {
+ 
+        string empty(seats[0].size(), '.');
+ 
+        return arrrrr(seats, 0, empty);
+    }
+};
